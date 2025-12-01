@@ -1,2 +1,24 @@
-# hcw-1-shopping-list-management
+# Shopping List Manager
 Programming+Teamwork project
+by (B)ONK:
+
+- Oktalon (Talon)
+- Nemanja (Nemo)
+- Karl (Karli)
+
+---
+
+> Eine mögliche Idee:  
+> Einkaufslistenverwaltung
+>
+> Man kann Einkaufslisten erstellen, speichern, bearbeiten, löschen, und als
+> Favorit markieren.  
+> Ein Einkaufslisteneintrag hat Name, Größe, Menge, und Preis. Dies ohne Menge
+> kann man auch als Favorit markieren.  
+> Die Summe wird dann automatisch berechnet.
+>
+> Und es besteht die Möglichkeit es auszudrucken. Dabei wird die Typst CLI verwendet.
+
+— Talon, 2025-10-08
+
+---
