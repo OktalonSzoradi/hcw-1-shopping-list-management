@@ -22,3 +22,11 @@ by (B)ONK:
 — Talon, 2025-10-08
 
 ---
+
+`documentation` contains:
+
+- Story Map
+- User Stories
+- Mockups
+
+and needs to be done by 2025-12-19 | December, Friday!!
