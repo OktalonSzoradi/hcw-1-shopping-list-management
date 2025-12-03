@@ -30,3 +30,13 @@ by (B)ONK:
 - Mockups
 
 and needs to be done by 2025-12-19 | December, Friday!!
+
+---
+
+**Grading**:
+
+- For our project, we are graded together as a group
+- For the test, everyone individually
+
+The test will probably be 2 A4 pages in length.
+
