@@ -23,7 +23,7 @@
     nick-name: "Karli",
   ),
 )
-#let date = "2025-12-04"
+#let date = "2025-12-09"
 
 #show: conf.with(
   document-type: document-type,
