@@ -104,7 +104,7 @@ User stories will be listed here...
   columns: (auto, auto, auto, 1fr),
   stroke: 0.25pt + gray,
   inset: 0.75em,
-  table.header([], [*Who?*], [*Do What?*], [*Why?*]),
+  table.header([], [*Who?*], [*Do/Want What?*], [*Why?*]),
   [As a], [User], [I'd like to do something], [so that I'm doing something],
   [As a], [User], [I'd like to do something], [so that I'm doing something],
   [As a], [User], [I'd like to do something], [so that I'm doing something],
