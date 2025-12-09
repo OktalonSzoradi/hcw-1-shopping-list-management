@@ -94,5 +94,31 @@ Digital version:
 = User Stories
 User stories will be listed here...
 
+#set table(fill: (_, y) => {
+  if y == 1 { color.hsl(0deg, 100%, 50%, 10%) }
+  if y >= 2 and y <= 6 { color.hsl(30deg, 100%, 50%, 10%) }
+  if y >= 7 and y <= 9 { color.hsl(60deg, 100%, 50%, 10%) }
+  if y >= 10 and y <= 12 { color.hsl(120deg, 100%, 50%, 10%) }
+})
+#table(
+  columns: (auto, auto, auto, 1fr),
+  stroke: 0.25pt + gray,
+  inset: 0.75em,
+  table.header([], [*Who?*], [*Do What?*], [*Why?*]),
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a], [User], [I'd like to do something], [so that I'm doing something],
+)
+#set table(fill: (_, y) => {})
+
 = Mockups
 Mockups will be shown here...
