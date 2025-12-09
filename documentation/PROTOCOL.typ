@@ -87,7 +87,6 @@ We made this together on 2025-11-27:
 Digital version:
 #align(left)[
   #image(
-    width: 115%,
     "StoryMap.drawio.png",
   )
 ]
