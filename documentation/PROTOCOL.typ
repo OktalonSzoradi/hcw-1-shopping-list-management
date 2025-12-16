@@ -23,7 +23,7 @@
     nick-name: "Karli",
   ),
 )
-#let date = "2025-12-09"
+#let date = "2025-12-16"
 
 #show: conf.with(
   document-type: document-type,
@@ -101,22 +101,38 @@ User stories will be listed here...
   if y >= 10 and y <= 12 { color.hsl(120deg, 100%, 50%, 10%) }
 })
 #table(
-  columns: (auto, auto, auto, 1fr),
+  columns: (auto, auto, 1fr, 1fr),
   stroke: 0.25pt + gray,
   inset: 0.75em,
   table.header([], [*Who?*], [*Do/Want What?*], [*Why?*]),
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
-  [As a], [User], [I'd like to do something], [so that I'm doing something],
+  [As a],
+  [User],
+  [I'd like to write a product name and add it to the list],
+  [so that I can remember it while shopping.],
+
+  [As a], [User], [I'd like to add a price to a product in the list], [so that I can manage my finances.],
+  [As a], [User], [I'd like to give the list a title], [so that I can differentiate between the lists.],
+  [As a],
+  [User],
+  [I'd like to add a size and amount to a product in the list],
+  [so that I know which exact product and how many to get.],
+
+  [As a],
+  [User],
+  [I'd like to be able to save and edit the list],
+  [so that I can remember what I shopped for the last times and can correct mistake.],
+
+  [As a],
+  [User],
+  [I'd like to have checkboxes next to each entry],
+  [so that I can check off stuff I've already bought.],
+
+  [As a], [User], [I'd like to add separation (headers) in the list], [so that I know which stores to visit.],
+  [As a], [User], [I'd like the sum to be calculated automatically], [so that I know how much I'll have to pay.],
+  [As a], [User], [I'd like to be able to export the list as a PDF], [so that I can print it out and bring it with me while shopping.],
+  [As a], [User], [I'd like to be able to mark products as high priority], [so that I can focus on getting the important products in case my budget is not enough.],
+  [As a], [User], [I'd like to favorite products], [so that I don't need to re-enter or spend time remembering it for future shopping lists.],
+  [As a], [User], [I'd like to have my favorites suggested to me while typing in a product name], [so that I can type the shopping list faster.],
 )
 #set table(fill: (_, y) => {})
 
