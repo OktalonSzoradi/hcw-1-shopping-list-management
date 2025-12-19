@@ -23,7 +23,7 @@
     nick-name: "Karli",
   ),
 )
-#let date = "2025-12-16"
+#let date = "2025-12-19"
 
 #show: conf.with(
   document-type: document-type,
@@ -40,7 +40,7 @@ team project is undertaken as part of the subjects _Programmierung_
 (Programming) and _Teamarbeit_ (Teamwork).
 
 This document is mainly for the Teamarbeit part. It contains at least our story
-map, user stories, and mockups.
+map, user stories (backlog), and mockups.
 
 Project team members are hereinafter referred to by their
 first names.
@@ -91,9 +91,7 @@ Digital version:
   )
 ]
 
-= User Stories
-User stories will be listed here...
-
+= User Stories (Backlog)
 #set table(fill: (_, y) => {
   if y == 1 { color.hsl(0deg, 100%, 50%, 10%) }
   if y >= 2 and y <= 6 { color.hsl(30deg, 100%, 50%, 10%) }
@@ -111,7 +109,9 @@ User stories will be listed here...
   [so that I can remember it while shopping.],
 
   [As a], [User], [I'd like to add a price to a product in the list], [so that I can manage my finances.],
+
   [As a], [User], [I'd like to give the list a title], [so that I can differentiate between the lists.],
+
   [As a],
   [User],
   [I'd like to add a size and amount to a product in the list],
@@ -122,19 +122,64 @@ User stories will be listed here...
   [I'd like to be able to save and edit the list],
   [so that I can remember what I shopped for the last times and can correct mistake.],
 
+  [As a], [User], [I'd like the sum to be calculated automatically], [so that I know how much I'll have to pay.],
+
+  [As a], [User], [I'd like to add separation (headers) in the list], [so that I know which stores to visit.],
+
   [As a],
   [User],
   [I'd like to have checkboxes next to each entry],
   [so that I can check off stuff I've already bought.],
 
-  [As a], [User], [I'd like to add separation (headers) in the list], [so that I know which stores to visit.],
-  [As a], [User], [I'd like the sum to be calculated automatically], [so that I know how much I'll have to pay.],
-  [As a], [User], [I'd like to be able to export the list as a PDF], [so that I can print it out and bring it with me while shopping.],
-  [As a], [User], [I'd like to be able to mark products as high priority], [so that I can focus on getting the important products in case my budget is not enough.],
-  [As a], [User], [I'd like to favorite products], [so that I don't need to re-enter or spend time remembering it for future shopping lists.],
-  [As a], [User], [I'd like to have my favorites suggested to me while typing in a product name], [so that I can type the shopping list faster.],
+  [As a],
+  [User],
+  [I'd like to be able to export the list as a PDF],
+  [so that I can print it out and bring it with me while shopping.],
+
+  [As a],
+  [User],
+  [I'd like to be able to mark products as high priority],
+  [so that I can focus on getting the important products in case my budget is not enough.],
+
+  [As a],
+  [User],
+  [I'd like to favorite products],
+  [so that I don't need to re-enter or spend time remembering it for future shopping lists.],
+
+  [As a],
+  [User],
+  [I'd like to have my favorites suggested to me while typing in a product name],
+  [so that I can type the shopping list faster.],
 )
 #set table(fill: (_, y) => {})
 
 = Mockups
-Mockups will be shown here...
+*Nemanja's mockup:*
+#align(center)[
+  #grid(
+    columns: (auto, auto, auto),
+    gutter: 1em,
+    [#image(
+      "Nemo_Mockup-001.png",
+    )],
+    [#image(
+      "Nemo_Mockup-002.png",
+    )],
+    // [#image(
+    //   "Nemo_Mockup-003.png",
+    // )],
+  )
+]
+#align(center)[
+  #image(
+    height: 45%,
+    "Nemo_Mockup-003.png",
+  )
+]
+
+*Oktalon's mockup:*
+#align(center)[
+  #image(
+    "Talon_Mockup.drawio.png",
+  )
+]
