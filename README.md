@@ -8,18 +8,20 @@ by (B)ONK:
 
 ---
 
-> Eine mögliche Idee:  
-> Einkaufslistenverwaltung
->
-> Man kann Einkaufslisten erstellen, speichern, bearbeiten, löschen, und als
-> Favorit markieren.  
-> Ein Einkaufslisteneintrag hat Name, Größe, Menge, und Preis. Dies ohne Menge
-> kann man auch als Favorit markieren.  
-> Die Summe wird dann automatisch berechnet.
->
-> Und es besteht die Möglichkeit es auszudrucken. Dabei wird die Typst CLI verwendet.
+**Deadline**:
 
-— Talon, 2025-10-08
+> MVP muss präsentierbereit sein und auch präsentiert werden am  
+> Mittwoch, 21. Jänner, 14:00—17:15  
+> Raum C.E.01
+
+---
+
+**Grading**:
+
+- For our project, we are graded together as a group
+- For the test, everyone individually
+
+The test will probably be 2 A4 pages in length.
 
 ---
 
@@ -72,10 +74,15 @@ Source: <https://moodle.hcw.ac.at/mod/forum/discuss.php?d=200821>
 
 ---
 
-**Grading**:
+> Eine mögliche Idee:  
+> Einkaufslistenverwaltung
+>
+> Man kann Einkaufslisten erstellen, speichern, bearbeiten, löschen, und als
+> Favorit markieren.  
+> Ein Einkaufslisteneintrag hat Name, Größe, Menge, und Preis. Dies ohne Menge
+> kann man auch als Favorit markieren.  
+> Die Summe wird dann automatisch berechnet.
+>
+> Und es besteht die Möglichkeit es auszudrucken. Dabei wird die Typst CLI verwendet.
 
-- For our project, we are graded together as a group
-- For the test, everyone individually
-
-The test will probably be 2 A4 pages in length.
-
+— Talon, 2025-10-08
