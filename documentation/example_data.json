@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "productID": 0,
+      "name": "Milk",
+      "size": "1L",
+      "price": 1.99,
+      "isFavorite": false
+    },
+    {
+      "productID": 1,
+      "name": "Eggs",
+      "size": "10 pcs.",
+      "price": 2.99,
+      "isFavorite": false
+    },
+    {
+      "productID": 2,
+      "name": "Chips",
+      "size": "250g",
+      "price": 2.99,
+      "isFavorite": true
+    }
+  ],
+  "shoppingLists": [
+    {
+      "shoppingListID": 0,
+      "title": "Untitled Shopping List",
+      "isFavorite": false,
+      "shoppingList": [
+        { "type": "product", "productID": 0, "amount": 1 },
+        { "type": "product", "productID": 1, "amount": 2 }
+      ]
+    },
+    {
+      "shoppingListID": 1,
+      "title": "My Shopping List",
+      "isFavorite": true,
+      "shoppingList": [
+        { "type": "heading", "content": "HOFER" },
+        { "type": "product", "productID": 1, "amount": 1 },
+        { "type": "separator" }
+      ]
+    }
+  ]
+}
