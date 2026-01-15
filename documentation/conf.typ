@@ -79,10 +79,11 @@
     stroke: 0.5pt,
   )
   set quote(block: true)
-  // set heading(
-  //   // numbering: (n1, ..x) => numbering("1.a.", calc.max(0, n1 - 1), ..x),
-  //   // numbering: (..x) => numbering("1.", ..x.pos().map(n => calc.max(0, n - 1)))
-  // )
+  set heading(
+    // numbering: (n1, ..x) => numbering("1.a.", calc.max(0, n1 - 1), ..x),
+    numbering: (..x) => numbering("1.", ..x.pos().map(n => calc.max(0, n - 1))),
+    supplement: [Chapter],
+  )
   show heading: set block(above: 4em, below: 1em)
   show link: set text(fill: blue)
   show link: underline
@@ -114,7 +115,24 @@
   //   [Last edited:], [#date]
   // )
   outline(title: "Table of Contents")
-  pagebreak()
+
+  show heading: h => {
+    if (h.level <= 1) [
+      #pagebreak()
+      // #set text(weight: "regular")
+      #v(3.5cm)
+      #h.supplement #{counter(heading).get().at(0) - 1}:
+      
+      #v(-1em)
+      
+      #text(size: 2em)[#h.body]
+
+      #pagebreak()
+    ] else [
+      #h
+    ]
+  }
+
   doc
 }
 

@@ -33,7 +33,8 @@
   date: date,
 )
 
-= Information
+= Prelude
+== Information
 For the first semester of the _Computer Science and Digital Communications_
 study program at _Hochschule Campus Wien — University of Applied Sciences_, a
 team project is undertaken as part of the subjects _Programmierung_
@@ -45,9 +46,11 @@ map, user stories (backlog), and mockups.
 Project team members are hereinafter referred to by their
 first names.
 
-= Original Idea Description
+== Original Idea Description
 On 2025-10-08, the following idea was pitched and ultimately decided on:
-#quote(attribution: [#authors.find(a => a.first-name == "Oktalon").first-name])[#text(style: "italic")[
+#quote(attribution: [#(
+  authors.find(a => a.first-name == "Oktalon").first-name
+)])[#text(style: "italic")[
   Eine mögliche Idee:\
   Einkaufslistenverwaltung
 
@@ -74,9 +77,8 @@ English translation:
   this.
 ]
 
-#pagebreak()
-
-= Story Map
+= Design & Planning
+== Story Map
 We made this together on 2025-11-27:
 #align(center)[
   #image(
@@ -91,7 +93,7 @@ Digital version:
   )
 ]
 
-= User Stories (Backlog)
+== User Stories (Backlog)
 #set table(fill: (_, y) => {
   if y == 1 { color.hsl(0deg, 100%, 50%, 10%) }
   if y >= 2 and y <= 6 { color.hsl(30deg, 100%, 50%, 10%) }
@@ -108,9 +110,15 @@ Digital version:
   [I'd like to write a product name and add it to the list],
   [so that I can remember it while shopping.],
 
-  [As a], [User], [I'd like to add a price to a product in the list], [so that I can manage my finances.],
+  [As a],
+  [User],
+  [I'd like to add a price to a product in the list],
+  [so that I can manage my finances.],
 
-  [As a], [User], [I'd like to give the list a title], [so that I can differentiate between the lists.],
+  [As a],
+  [User],
+  [I'd like to give the list a title],
+  [so that I can differentiate between the lists.],
 
   [As a],
   [User],
@@ -122,9 +130,15 @@ Digital version:
   [I'd like to be able to save and edit the list],
   [so that I can remember what I shopped for the last times and can correct mistake.],
 
-  [As a], [User], [I'd like the sum to be calculated automatically], [so that I know how much I'll have to pay.],
+  [As a],
+  [User],
+  [I'd like the sum to be calculated automatically],
+  [so that I know how much I'll have to pay.],
 
-  [As a], [User], [I'd like to add separation (headers) in the list], [so that I know which stores to visit.],
+  [As a],
+  [User],
+  [I'd like to add separation (headers) in the list],
+  [so that I know which stores to visit.],
 
   [As a],
   [User],
@@ -153,7 +167,7 @@ Digital version:
 )
 #set table(fill: (_, y) => {})
 
-= Mockups
+== Mockups
 *Nemanja's mockup:*
 #align(center)[
   #grid(
@@ -183,3 +197,73 @@ Digital version:
     "Talon_Mockup.drawio.png",
   )
 ]
+
+= Data & Architecture
+== ER Diagram
+Here is a non-standards-conforming Entity Relationship (ER) Diagram which models
+our data:
+#image(
+  "ER_Diagram-ER Diagram.drawio.png",
+)
+
+#pagebreak()
+
+== UML Diagram
+Here is a non-standards-conforming Unified Modeling Language (UML) Diagram
+which also models our data:
+#image(
+  "ER_Diagram-UML.drawio.png",
+)
+
+#pagebreak()
+
+== JSON
+Here's how we could save data if we wanted to use JSON (JavaScript Object Model):
+```json
+{
+  "products": [
+    {
+      "productID": 0,
+      "name": "Milk",
+      "size": "1L",
+      "price": 1.99,
+      "isFavorite": false
+    },
+    {
+      "productID": 1,
+      "name": "Eggs",
+      "size": "10 pcs.",
+      "price": 2.99,
+      "isFavorite": false
+    },
+    {
+      "productID": 2,
+      "name": "Chips",
+      "size": "250g",
+      "price": 2.99,
+      "isFavorite": true
+    }
+  ],
+  "shoppingLists": [
+    {
+      "shoppingListID": 0,
+      "title": "Untitled Shopping List",
+      "isFavorite": false,
+      "shoppingList": [
+        { "type": "product", "productID": 0, "amount": 1, "priority": 0 },
+        { "type": "product", "productID": 1, "amount": 2, "priority": 0 }
+      ]
+    },
+    {
+      "shoppingListID": 1,
+      "title": "My Shopping List",
+      "isFavorite": true,
+      "shoppingList": [
+        { "type": "heading", "content": "HOFER" },
+        { "type": "product", "productID": 1, "amount": 1, "priority": 2 },
+        { "type": "separator" }
+      ]
+    }
+  ]
+}
+```
