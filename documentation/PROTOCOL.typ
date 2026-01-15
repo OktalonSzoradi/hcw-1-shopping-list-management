@@ -23,7 +23,7 @@
     nick-name: "Karli",
   ),
 )
-#let date = "2025-12-19"
+#let date = datetime.today().display()
 
 #show: conf.with(
   document-type: document-type,
