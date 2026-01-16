@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.StringConverter;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class ShoppingListController {
     private final ObservableList<ShoppingList> shoppingLists =
@@ -45,5 +47,16 @@ public class ShoppingListController {
                 )
         );
         shoppingListIdCounter += 1;
+    }
+
+    @FXML
+    public void showAboutPopup() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText("Shopping List Manager");
+
+        alert.setContentText("Created by:Oktalon, Nemanja & Karl");
+
+        alert.showAndWait();
     }
 }
