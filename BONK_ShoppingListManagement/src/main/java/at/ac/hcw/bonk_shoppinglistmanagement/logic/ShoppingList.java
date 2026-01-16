@@ -1,5 +1,8 @@
 package at.ac.hcw.bonk_shoppinglistmanagement.logic;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,12 +11,12 @@ public class ShoppingList {
 
     private final int shoppingListID;
     private final List<ShoppingListElement> shoppingList; // NOT NULL
-    private String title;                                  // NOT NULL
+    private StringProperty title;
     private boolean isFavorite;                            // NOT NULL
 
     public ShoppingList(int shoppingListID, String title, boolean isFavorite) {
         this.shoppingListID = shoppingListID;
-        this.title = Objects.requireNonNull(title, "title must not be null");
+        this.title = new SimpleStringProperty(Objects.requireNonNull(title, "title must not be null"));
         this.isFavorite = isFavorite;
         this.shoppingList = new ArrayList<>();
     }
@@ -27,11 +30,11 @@ public class ShoppingList {
     }
 
     public String getTitle() {
-        return title;
+        return title.getValue();
     }
 
     public void setTitle(String title) {
-        this.title = Objects.requireNonNull(title, "title must not be null");
+        this.title = new SimpleStringProperty(Objects.requireNonNull(title, "title must not be null"));
     }
 
     public boolean isFavorite() {
@@ -67,20 +70,11 @@ public class ShoppingList {
     }
 
     public void print() {
-        System.out.println("=== ShoppingList #" + shoppingListID + " ===");
-        System.out.println("Title: " + title + (isFavorite ? "  ★" : ""));
-        System.out.println();
+    }
 
-        if (shoppingList.isEmpty()) {
-            System.out.println("(empty)");
-            return;
-        }
-
-        for (int i = 0; i < shoppingList.size(); i++) {
-            ShoppingListElement el = shoppingList.get(i);
-            // Wenn eure Elementklassen toString sauber machen -> super
-            System.out.printf("%2d) %s%n", i, el.toString());
-        }
+    @Override
+    public String toString() {
+        return title.getValue();
     }
 }
 
