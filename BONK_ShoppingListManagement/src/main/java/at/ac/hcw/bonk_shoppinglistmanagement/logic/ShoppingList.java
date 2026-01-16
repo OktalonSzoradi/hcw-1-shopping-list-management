@@ -76,7 +76,9 @@ public class ShoppingList {
 
     @Override
     public String toString() {
-        return title.getValue();
+        if (isFavorite)
+            return getTitle() + "★";
+        return getTitle();
     }
 }
 
