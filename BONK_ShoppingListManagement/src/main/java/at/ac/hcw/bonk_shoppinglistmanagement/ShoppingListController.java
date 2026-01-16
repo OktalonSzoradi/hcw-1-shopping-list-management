@@ -124,6 +124,8 @@ public class ShoppingListController {
     public void initialize() {
         BooleanBinding noListSelected = listViewShoppingLists.getSelectionModel().selectedItemProperty().isNull();
 
+        shoppingListIdCounter = 0;
+
         // --- ListView setup ---
         listViewShoppingLists.setItems(shoppingLists);
         listViewShoppingLists.setEditable(true);
@@ -247,5 +249,29 @@ public class ShoppingListController {
                 listViewShoppingLists.getSelectionModel().clearSelection();
             }
         });
+    }
+
+    @FXML
+    public void printThisShoppingList() {
+        ShoppingList selectedList = listViewShoppingLists.getSelectionModel().getSelectedItem();
+
+        if (selectedList == null) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a shopping list to print.");
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+            selectedList.print();
+        } catch (Exception e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Couldn't print");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
 }

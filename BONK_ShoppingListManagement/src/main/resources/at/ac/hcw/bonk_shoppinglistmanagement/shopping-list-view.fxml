@@ -93,7 +93,7 @@
                                 <!--<Button fx:id="buttonAddHeading" mnemonicParsing="false" text="+ Heading"/>-->
                                 <!--<Button fx:id="buttonAddSeparator" mnemonicParsing="false" text="+ Separator"/>-->
                                 <Region HBox.hgrow="ALWAYS"/>
-                                <Button fx:id="buttonPrint" mnemonicParsing="false" text="🖨"/>
+                                <Button fx:id="buttonPrint" onAction="#printThisShoppingList" mnemonicParsing="false" text="🖨"/>
                                 <Label fx:id="labelTotal" text="Total: €0.00">
                                     <font>
                                         <Font name="System Bold" size="12.0"/>
