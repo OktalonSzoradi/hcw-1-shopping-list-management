@@ -50,7 +50,7 @@
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                             </padding>
                             <children>
-                                <Button fx:id="buttonDeleteShoppingList" mnemonicParsing="false" text="🗑"/>
+                                <Button  fx:id="buttonDeleteShoppingList" onAction="#deleteSelectedList" mnemonicParsing="false" text="🗑"/>
                                 <Region HBox.hgrow="ALWAYS"/>
                                 <Button mnemonicParsing="false" onAction="#newShoppingList" text="+"/>
                             </children>
