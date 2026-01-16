@@ -4,6 +4,7 @@ import at.ac.hcw.bonk_shoppinglistmanagement.logic.ShoppingList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.StringConverter;
@@ -12,10 +13,15 @@ public class ShoppingListController {
     private final ObservableList<ShoppingList> shoppingLists =
             FXCollections.observableArrayList();
 
+    private int shoppingListIdCounter = 0;
+
     @FXML
     private ListView<ShoppingList> listViewShoppingLists;
 
-    private int shoppingListIdCounter = 0;
+    @FXML
+    private Button buttonDeleteShoppingList;
+
+
 
     @FXML
     public void initialize() {
@@ -33,6 +39,11 @@ public class ShoppingListController {
                 return new ShoppingList(-1, newTitle, false); // only used to commit edit
             }
         }));
+
+
+        buttonDeleteShoppingList.disableProperty().bind(
+                listViewShoppingLists.getSelectionModel().selectedItemProperty().isNull()
+        );
     }
 
     @FXML
