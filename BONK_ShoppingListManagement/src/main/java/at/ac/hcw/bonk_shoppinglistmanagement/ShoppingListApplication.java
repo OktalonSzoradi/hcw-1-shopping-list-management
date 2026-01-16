@@ -7,13 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
-
+public class ShoppingListApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(ShoppingListApplication.class.getResource("shopping-list-view.fxml"));
         Scene scene = new Scene(loader.load(), 600, 400);
-        HelloController controller = loader.getController();
+        ShoppingListController controller = loader.getController();
         stage.setTitle("ShoppingList Management");
         stage.setScene(scene);
         stage.show();
@@ -23,4 +22,3 @@ public class HelloApplication extends Application {
         launch();
     }
 }
-
