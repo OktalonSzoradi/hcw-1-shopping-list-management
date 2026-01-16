@@ -76,7 +76,6 @@ public class Product {
         if (!(o instanceof Product other)) return false;
         return getProductID() == other.getProductID();
     }
-
     @Override
     public int hashCode() {
         return Integer.hashCode(getProductID());

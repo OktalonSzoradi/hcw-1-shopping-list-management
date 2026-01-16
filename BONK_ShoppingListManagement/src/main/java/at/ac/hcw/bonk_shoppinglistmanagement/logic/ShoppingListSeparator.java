@@ -4,5 +4,6 @@ public final class ShoppingListSeparator implements ShoppingListElement {
     @Override
     public String toString() {
         return "----------------";
+
     }
 }

@@ -1,7 +1,6 @@
 package at.ac.hcw.bonk_shoppinglistmanagement.logic;
 
 import javafx.beans.property.*;
-
 import java.util.Objects;
 
 public final class ShoppingListEntry implements ShoppingListElement {

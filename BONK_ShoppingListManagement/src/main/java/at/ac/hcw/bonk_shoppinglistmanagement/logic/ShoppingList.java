@@ -66,7 +66,6 @@ public class ShoppingList {
         return true;
     }
 
-    // UML-Methode
     public void print() {
         System.out.println("=== ShoppingList #" + shoppingListID + " ===");
         System.out.println("Title: " + title + (isFavorite ? "  ★" : ""));
