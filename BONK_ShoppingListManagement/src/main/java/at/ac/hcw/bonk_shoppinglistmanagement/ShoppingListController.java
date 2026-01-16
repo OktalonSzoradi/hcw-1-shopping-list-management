@@ -176,4 +176,31 @@ public class ShoppingListController {
 
         alert.showAndWait();
     }
+
+    @FXML
+    public void deleteSelectedList() {
+        ShoppingList selectedList = listViewShoppingLists.getSelectionModel().getSelectedItem();
+
+        if (selectedList == null) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a shopping list to delete.");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert confirm = new Alert(AlertType.CONFIRMATION);
+        confirm.setTitle("Delete List");
+        confirm.setHeaderText("Delete '" + selectedList + "'?");
+        confirm.setContentText("Are you sure you want to delete this shopping list? This cannot be undone.");
+
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                listViewShoppingLists.getItems().remove(selectedList);
+
+                listViewShoppingLists.getSelectionModel().clearSelection();
+            }
+        });
+    }
 }
