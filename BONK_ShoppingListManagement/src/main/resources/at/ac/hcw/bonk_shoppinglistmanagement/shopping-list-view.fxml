@@ -94,7 +94,7 @@
                                 <!--<Button fx:id="buttonAddSeparator" mnemonicParsing="false" text="+ Separator"/>-->
                                 <Region HBox.hgrow="ALWAYS"/>
                                 <Button fx:id="buttonPrint" mnemonicParsing="false" text="🖨"/>
-                                <Label text="Total: €0.00">
+                                <Label fx:id="labelTotal" text="Total: €0.00">
                                     <font>
                                         <Font name="System Bold" size="12.0"/>
                                     </font>

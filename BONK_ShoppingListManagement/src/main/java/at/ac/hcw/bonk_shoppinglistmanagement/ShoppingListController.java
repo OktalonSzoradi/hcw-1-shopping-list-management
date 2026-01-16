@@ -4,19 +4,21 @@ import at.ac.hcw.bonk_shoppinglistmanagement.logic.Product;
 import at.ac.hcw.bonk_shoppinglistmanagement.logic.ShoppingList;
 import at.ac.hcw.bonk_shoppinglistmanagement.logic.ShoppingListElement;
 import at.ac.hcw.bonk_shoppinglistmanagement.logic.ShoppingListEntry;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingListController {
     private final ObservableList<ShoppingList> shoppingLists = FXCollections.observableArrayList();
@@ -34,17 +36,19 @@ public class ShoppingListController {
     private Button buttonDeleteShoppingList;
     @FXML
     private Label labelCurrentShoppingListTitle;
+    @FXML
+    private Label labelTotal;
 
     @FXML
-    private javafx.scene.control.TableView<ShoppingListEntry> tableViewProducts;
+    private TableView<ShoppingListEntry> tableViewProducts;
     @FXML
-    private javafx.scene.control.TableColumn<ShoppingListEntry, String> columnName;
+    private TableColumn<ShoppingListEntry, String> columnName;
     @FXML
-    private javafx.scene.control.TableColumn<ShoppingListEntry, String> columnSize;
+    private TableColumn<ShoppingListEntry, String> columnSize;
     @FXML
-    private javafx.scene.control.TableColumn<ShoppingListEntry, Integer> columnAmount;
+    private TableColumn<ShoppingListEntry, Integer> columnAmount;
     @FXML
-    private javafx.scene.control.TableColumn<ShoppingListEntry, Double> columnPrice;
+    private TableColumn<ShoppingListEntry, Double> columnPrice;
 
     private void initializeTable() {
         // Make table editable
@@ -79,6 +83,42 @@ public class ShoppingListController {
 //            }
 //        });
     }
+
+    private void bindTotalToShoppingList(ShoppingList shoppingList) {
+        labelTotal.textProperty().unbind();
+
+        if (shoppingList == null) {
+            labelTotal.setText("Total: €0.00");
+            return;
+        }
+
+        labelTotal.textProperty().bind(Bindings.createStringBinding(() -> {
+            double total = 0.0;
+
+            for (ShoppingListElement el : shoppingList.getShoppingList()) {
+                if (el instanceof ShoppingListEntry entry) {
+                    total += entry.getAmount() * entry.getProduct().getPrice();
+                }
+            }
+
+            return String.format("Total: €%.2f", total);
+        }, createTotalDependencies(shoppingList)));
+    }
+
+    private Observable[] createTotalDependencies(ShoppingList shoppingList) {
+        List<Observable> deps = new ArrayList<>();
+        deps.add(shoppingList.getShoppingList()); // add/remove entries
+
+        for (ShoppingListElement el : shoppingList.getShoppingList()) {
+            if (el instanceof ShoppingListEntry entry) {
+                deps.add(entry.amountProperty());
+                deps.add(entry.getProduct().priceProperty());
+            }
+        }
+
+        return deps.toArray(new Observable[0]);
+    }
+
 
     @FXML
     public void initialize() {
@@ -120,6 +160,10 @@ public class ShoppingListController {
                         entries.add(entry);
                     }
                 }
+
+                bindTotalToShoppingList(newList);
+
+                newList.getShoppingList().addListener((ListChangeListener<ShoppingListElement>) c -> bindTotalToShoppingList(newList));
 
                 tableViewProducts.setItems(entries);
             } else {
