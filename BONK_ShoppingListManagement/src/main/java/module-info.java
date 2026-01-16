@@ -5,4 +5,5 @@ module at.ac.hcw.bonk_shoppinglistmanagement {
 
     opens at.ac.hcw.bonk_shoppinglistmanagement to javafx.fxml;
     exports at.ac.hcw.bonk_shoppinglistmanagement;
+    exports at.ac.hcw.bonk_shoppinglistmanagement.logic;
 }
