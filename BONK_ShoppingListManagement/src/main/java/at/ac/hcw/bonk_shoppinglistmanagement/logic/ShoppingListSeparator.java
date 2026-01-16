@@ -7,6 +7,7 @@ public final class ShoppingListSeparator implements ShoppingListElement {
     @Override
     public String toJSON() {
         return "{ \"type\": \"separator\" }";
+    }
 
     @Override
     public String toString() {
