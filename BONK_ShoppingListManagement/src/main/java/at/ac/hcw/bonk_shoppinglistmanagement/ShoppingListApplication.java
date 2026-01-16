@@ -11,7 +11,7 @@ public class ShoppingListApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(ShoppingListApplication.class.getResource("shopping-list-view.fxml"));
-        Scene scene = new Scene(loader.load(), 600, 400);
+        Scene scene = new Scene(loader.load(), 1000, 700);
         ShoppingListController controller = loader.getController();
         stage.setTitle("ShoppingList Management");
         stage.setScene(scene);
