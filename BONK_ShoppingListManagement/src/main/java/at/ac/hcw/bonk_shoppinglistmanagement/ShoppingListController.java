@@ -1,23 +1,26 @@
 package at.ac.hcw.bonk_shoppinglistmanagement;
 
+import at.ac.hcw.bonk_shoppinglistmanagement.logic.Product;
 import at.ac.hcw.bonk_shoppinglistmanagement.logic.ShoppingList;
+import at.ac.hcw.bonk_shoppinglistmanagement.logic.ShoppingListElement;
+import at.ac.hcw.bonk_shoppinglistmanagement.logic.ShoppingListEntry;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
 
 public class ShoppingListController {
-    private final ObservableList<ShoppingList> shoppingLists =
-            FXCollections.observableArrayList();
+    private final ObservableList<ShoppingList> shoppingLists = FXCollections.observableArrayList();
     private int shoppingListIdCounter = 0;
+    private int productIdCounter = 0;
 
     @FXML
     private ListView<ShoppingList> listViewShoppingLists;
@@ -32,15 +35,58 @@ public class ShoppingListController {
     private Label labelCurrentShoppingListTitle;
 
     @FXML
-    public void initialize() {
-        BooleanBinding noListSelected = listViewShoppingLists.getSelectionModel()
-                .selectedItemProperty()
-                .isNull();
+    private javafx.scene.control.TableView<ShoppingListEntry> tableViewProducts;
+    @FXML
+    private javafx.scene.control.TableColumn<ShoppingListEntry, String> columnName;
+    @FXML
+    private javafx.scene.control.TableColumn<ShoppingListEntry, String> columnSize;
+    @FXML
+    private javafx.scene.control.TableColumn<ShoppingListEntry, Integer> columnAmount;
+    @FXML
+    private javafx.scene.control.TableColumn<ShoppingListEntry, Double> columnPrice;
 
+    private void initializeTable() {
+        // Make table editable
+        tableViewProducts.setEditable(true);
+
+        // Name column
+        columnName.setCellValueFactory(cellData -> cellData.getValue().getProduct().nameProperty());
+        columnName.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnName.setOnEditCommit(event -> event.getRowValue().getProduct().setName(event.getNewValue()));
+
+        // Size column
+        columnSize.setCellValueFactory(cellData -> cellData.getValue().getProduct().sizeProperty());
+        columnSize.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnSize.setOnEditCommit(event -> event.getRowValue().getProduct().setSize(event.getNewValue()));
+
+        // Price column
+        columnPrice.setCellValueFactory(cellData -> cellData.getValue().getProduct().priceProperty().asObject());
+        columnPrice.setCellFactory(TextFieldTableCell.forTableColumn(new javafx.util.converter.DoubleStringConverter()));
+        columnPrice.setOnEditCommit(event -> event.getRowValue().getProduct().setPrice(event.getNewValue()));
+
+        // Amount column
+        columnAmount.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
+        columnAmount.setCellFactory(TextFieldTableCell.forTableColumn(new javafx.util.converter.IntegerStringConverter()));
+        columnAmount.setOnEditCommit(event -> event.getRowValue().setAmount(event.getNewValue()));
+
+        // Optional: update the TableView when selection changes
+//        listViewShoppingLists.getSelectionModel().selectedItemProperty().addListener((obs, oldList, newList) -> {
+//            if (newList != null) {
+//                tableViewProducts.setItems(newList.getEntries()); // Assuming getEntries() returns ObservableList<ShoppingListEntry>
+//            } else {
+//                tableViewProducts.setItems(FXCollections.observableArrayList());
+//            }
+//        });
+    }
+
+    @FXML
+    public void initialize() {
+        BooleanBinding noListSelected = listViewShoppingLists.getSelectionModel().selectedItemProperty().isNull();
+
+        // --- ListView setup ---
         listViewShoppingLists.setItems(shoppingLists);
         listViewShoppingLists.setEditable(true);
         listViewShoppingLists.setCellFactory(lv -> new TextFieldListCell<>(new StringConverter<>() {
-
             @Override
             public String toString(ShoppingList item) {
                 return item == null ? "" : item.getTitle();
@@ -52,35 +98,77 @@ public class ShoppingListController {
             }
         }));
 
+        // --- Buttons reactive state ---
         buttonDeleteShoppingList.disableProperty().bind(noListSelected);
         buttonAddEntry.disableProperty().bind(noListSelected);
         buttonPrint.disableProperty().bind(noListSelected);
 
-        labelCurrentShoppingListTitle.textProperty().bind(
-                Bindings.when(listViewShoppingLists.getSelectionModel().selectedItemProperty().isNotNull())
-                        .then(Bindings.selectString(
-                                listViewShoppingLists.getSelectionModel().selectedItemProperty(),
-                                "title"
-                        ))
-                        .otherwise("No shopping list selected")
-        );
+        // --- Label for current shopping list ---
+        labelCurrentShoppingListTitle.textProperty().bind(Bindings.when(listViewShoppingLists.getSelectionModel().selectedItemProperty().isNotNull()).then(Bindings.selectString(listViewShoppingLists.getSelectionModel().selectedItemProperty(), "title")).otherwise("No shopping list selected"));
+
+        // --- Initialize TableView columns ---
+        initializeTable();
+
+        // --- Update TableView when a shopping list is selected ---
+        listViewShoppingLists.getSelectionModel().selectedItemProperty().addListener((obs, oldList, newList) -> {
+            if (newList != null) {
+                ObservableList<ShoppingListEntry> entries = FXCollections.observableArrayList();
+
+                for (ShoppingListElement el : newList.getShoppingList()) {
+                    if (el instanceof ShoppingListEntry entry) {
+                        entries.add(entry);
+                    }
+                }
+
+                tableViewProducts.setItems(entries);
+            } else {
+                tableViewProducts.setItems(FXCollections.observableArrayList()); // empty table
+            }
+        });
+
+        // Optional: placeholder for empty table
+        tableViewProducts.setPlaceholder(new Label("Select a shopping list to see its products"));
     }
 
     @FXML
     public void newShoppingList() {
-        shoppingLists.add(
-                new ShoppingList(
-                        shoppingListIdCounter,
-                        "Untitled Shopping List",
-                        false
-                )
-        );
+        shoppingLists.add(new ShoppingList(shoppingListIdCounter, "Untitled Shopping List", false));
         shoppingListIdCounter += 1;
     }
 
     @FXML
+    public void addProduct() {
+        // Get the currently selected shopping list
+        ShoppingList selectedList = listViewShoppingLists.getSelectionModel().getSelectedItem();
+
+        if (selectedList != null) {
+            // Add a new product to it (placeholder)
+            selectedList.addEntry(new Product(productIdCounter, "", "", 0.00, false), 1, 0);
+
+            productIdCounter += 1;
+
+            // Re-filter the entries to update the TableView
+            ObservableList<ShoppingListEntry> entries = FXCollections.observableArrayList();
+            for (ShoppingListElement el : selectedList.getShoppingList()) {
+                if (el instanceof ShoppingListEntry entry) {
+                    entries.add(entry);
+                }
+            }
+            tableViewProducts.setItems(entries);
+            tableViewProducts.getSelectionModel().selectLast();
+        } else {
+            // Should never happen if buttons are properly disabled
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Shopping List Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a shopping list first.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
     public void showAboutPopup() {
-        Alert alert = new Alert(AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
         alert.setHeaderText("Shopping List Manager");
 

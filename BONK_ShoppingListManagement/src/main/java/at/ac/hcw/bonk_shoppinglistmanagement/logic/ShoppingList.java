@@ -2,6 +2,8 @@ package at.ac.hcw.bonk_shoppinglistmanagement.logic;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.Objects;
 public class ShoppingList {
 
     private final int shoppingListID;
-    private final List<ShoppingListElement> shoppingList; // NOT NULL
+    private final ObservableList<ShoppingListElement> shoppingList; // NOT NULL
     private StringProperty title;
     private boolean isFavorite;                            // NOT NULL
 
@@ -18,14 +20,14 @@ public class ShoppingList {
         this.shoppingListID = shoppingListID;
         this.title = new SimpleStringProperty(Objects.requireNonNull(title, "title must not be null"));
         this.isFavorite = isFavorite;
-        this.shoppingList = new ArrayList<>();
+        this.shoppingList = FXCollections.observableArrayList();
     }
 
     public int getShoppingListID() {
         return shoppingListID;
     }
 
-    public List<ShoppingListElement> getShoppingList() {
+    public ObservableList<ShoppingListElement> getShoppingList() {
         return shoppingList;
     }
 
